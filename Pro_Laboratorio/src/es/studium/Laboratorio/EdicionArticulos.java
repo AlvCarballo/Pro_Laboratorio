@@ -19,6 +19,7 @@ public class EdicionArticulos extends Frame implements WindowListener, ActionLis
 	BaseDatos bd = new BaseDatos();
 	Connection conexion = null;
 	String[] cadena;
+<<<<<<< HEAD
 	int idArticuloEditar = 0;
 	String NombreUsuario="";
 	Utilidades utilidad = new Utilidades();
@@ -79,6 +80,61 @@ public class EdicionArticulos extends Frame implements WindowListener, ActionLis
 	{
 		setVisible(false);
 		utilidad.registrarLog(NombreUsuario,"Saliendo de Edicion Articulo");
+=======
+	int idClienteEditar = 0;
+	
+	public EdicionArticulos()
+	{
+		setTitle("Editar Articulo");
+		setLayout(new FlowLayout());
+		// Rellenar el Choice
+		listado.add("Seleccionar un Articulo...");
+		// Conectar BD
+		conexion = bd.conectar();
+		cadena = (bd.consultarArticulosChoice(conexion)).split("#");
+		for(int i = 0; i < cadena.length; i++)
+		{
+			listado.add(cadena[i]);
+		}
+		add(listado);
+		btnAceptar.addActionListener(this);
+		btnLimpiar.addActionListener(this);
+		add(btnAceptar);
+		add(btnLimpiar);
+		addWindowListener(this);
+		setSize(400,300);
+		setResizable(false);
+		setLocationRelativeTo(null);
+		setVisible(true);
+	}
+	@Override
+	public void actionPerformed(ActionEvent arg0)
+	{
+		if(btnLimpiar.equals(arg0.getSource()))
+		{
+			listado.select(0);
+		}
+		else if(btnAceptar.equals(arg0.getSource()))
+		{
+			if(listado.getSelectedItem().equals("Seleccionar un Articulo..."))
+			{
+				// No hacemos nada
+			}
+			else
+			{
+				// Coger el elemento seleccionado
+				String[] tabla = listado.getSelectedItem().split("-");
+				// El idCliente que quiero editar está en tabla[0]
+				idClienteEditar = Integer.parseInt(tabla[0]);
+				new ModificarTrabajos(idClienteEditar); 
+			}
+		}
+	}
+	@Override
+	public void windowClosing(WindowEvent arg0)
+	{
+		setVisible(false);
+>>>>>>> branch 'master' of https://github.com/AlvCarballo/Pro_Laboratorio
 	}
 	@Override
 	public void windowActivated(WindowEvent arg0){}

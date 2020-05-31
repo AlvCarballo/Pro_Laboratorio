@@ -30,6 +30,7 @@ public class AltaArticulos extends Frame implements WindowListener, ActionListen
 	Connection conexion = null;
 	Dialog dlgMensaje = new Dialog(this,"Mensaje", true);
 	Label mensaje = new Label("");
+<<<<<<< HEAD
 	String NombreUsuario="";
 	Utilidades utilidad = new Utilidades();
 	
@@ -125,6 +126,104 @@ public class AltaArticulos extends Frame implements WindowListener, ActionListen
 		else
 		{
 			utilidad.registrarLog(NombreUsuario,"Saliendo de Alta Artículo");
+=======
+	Utilidades utilidad = new Utilidades();
+
+	Login nombreUsuario=new Login();
+	String nombreUser=nombreUsuario.getnombreUsuario();
+	
+	public AltaArticulos()
+	{
+		utilidad.registrarLog(nombreUser,"Entrando en Alta Artículo");
+		setTitle("ALTA de Artículo");//Ponemos nombre a la ventana
+		setLayout(new FlowLayout());
+		//Añadimos a la ventana  las etiquetas, los cuadros de texto y los botones
+		add(lblDescripcionArt);
+		add(txtDescripcionArt);
+		add(lblPrecio);
+		add(txtPrecio);
+		add(lblCantidad);
+		add(txtCantidad);
+		add(btnAceptar);
+		add(btnLimpiar);
+		//Indicamos que los botones tienen acciones
+		btnAceptar.addActionListener(this);
+		btnLimpiar.addActionListener(this);
+		btnAceptarDialogo.addActionListener(this);
+		addWindowListener(this);
+		setSize(200,250); //Ponemos el tamaño de la ventana
+		setResizable(false);//Indicamos que no se pueda editar el tamaño
+		setLocationRelativeTo(null);//Indicamos la localizacion inicial de la ventana
+		setVisible(true);//Hacemos visible la ventana
+	}
+	@Override
+	public void actionPerformed(ActionEvent arg0)
+	{
+		if(btnLimpiar.equals(arg0.getSource()))
+		{
+			//Selexionamos todos los txt y los borramos
+			txtDescripcionArt.selectAll();
+			txtDescripcionArt.setText("");
+			txtPrecio.selectAll();
+			txtPrecio.setText("");
+			txtCantidad.selectAll();
+			txtCantidad.setText("");
+			txtDescripcionArt.requestFocus();
+			utilidad.registrarLog(nombreUser,"Limpiando datos formulario Alta Artículo");
+		}
+		else // btnAceptar
+		{
+			// Conectar BD
+			conexion = bd.conectar();
+			// Hacer INSERT
+			String sentencia = "INSERT INTO articulos VALUES(null,'"+txtDescripcionArt.getText()+"','"+txtPrecio.getText()+","+txtCantidad.getText()+"')";
+			utilidad.registrarLog(nombreUser,sentencia);
+			// Feedback
+			if((bd.altaClinica(conexion, sentencia))==0)
+			{
+				// Todo bien
+				mensaje.setText("Alta de Artículo correcta");
+				dlgMensaje.setTitle("Alta Artículo");
+				dlgMensaje.setSize(180,120);
+				dlgMensaje.setLayout(new FlowLayout());
+				dlgMensaje.addWindowListener(this);
+				dlgMensaje.add(mensaje);
+				dlgMensaje.setLocationRelativeTo(null);
+				dlgMensaje.setVisible(true);
+				utilidad.registrarLog(nombreUser,"Alta realizada Correctamente");
+			}
+			else
+			{
+				// Error
+				mensaje.setText("Error en Alta de Articulo");
+				dlgMensaje.setTitle("Alta Artículo");
+				dlgMensaje.setSize(180,120);
+				dlgMensaje.setLayout(new FlowLayout());
+				dlgMensaje.addWindowListener(this);
+				dlgMensaje.add(mensaje);
+				dlgMensaje.setLocationRelativeTo(null);
+				dlgMensaje.setVisible(true);
+				utilidad.registrarLog(nombreUser,"Error en Alta de Artículo");
+			}
+			bd.desconectar(conexion);
+			// Desconectar
+		}
+	}
+	@Override
+	public void windowActivated(WindowEvent arg0){}
+	@Override
+	public void windowClosed(WindowEvent arg0){}
+	@Override
+	public void windowClosing(WindowEvent arg0)
+	{
+		if(dlgMensaje.isActive())
+		{
+			dlgMensaje.setVisible(false);
+		}
+		else
+		{
+			utilidad.registrarLog(nombreUser,"Saliendo de Alta Artículo");
+>>>>>>> branch 'master' of https://github.com/AlvCarballo/Pro_Laboratorio
 			setVisible(false);
 		}
 	}

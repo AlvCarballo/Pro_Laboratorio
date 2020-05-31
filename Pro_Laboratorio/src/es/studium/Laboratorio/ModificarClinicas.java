@@ -36,6 +36,7 @@ public class ModificarClinicas extends Frame implements WindowListener, ActionLi
 		Dialog dlgMensaje = new Dialog(this,"Mensaje", true);
 		Label mensaje = new Label("");
 		int idClinicaEditar;
+<<<<<<< HEAD
 		String NombreUsuario="";
 		Utilidades utilidad = new Utilidades();
 		
@@ -148,6 +149,112 @@ public class ModificarClinicas extends Frame implements WindowListener, ActionLi
 		else
 		{
 			utilidad.registrarLog(NombreUsuario,"Saliendo de Modificar Clinica");
+=======
+		Utilidades utilidad = new Utilidades();
+
+		Login nombreUsuario=new Login();
+		String nombreUser=nombreUsuario.getnombreUsuario();
+		
+	public ModificarClinicas(int idClinicaEditar)
+	{
+		this.idClinicaEditar = idClinicaEditar; 
+		// Conectar BD
+		conexion = bd.conectar();
+		cadena = (bd.consultarClinica(conexion, idClinicaEditar)).split("#");
+		// cadena[0] = idArticulo
+		// cadena[1] = nombreArticulo
+		// cadena[2] = precioArticulo
+		// cadena[3] = cantidadArticulo
+		setTitle("Modificar Cliente");
+		setLayout(new GridLayout(7,2));
+		
+		add(lblNifClinica);
+		txtNifClinica.setText(cadena[1]);
+		add(txtNifClinica);
+		add(lblNombreClinica);
+		txtNombreClinica.setText(cadena[2]);
+		add(txtNombreClinica);
+		add(lblDireccionClinica);
+		txtDireccionClinica.setText(cadena[3]);
+		add(txtDireccionClinica);
+		add(lblTelefonoClinica);
+		txtTelefonoClinica.setText(cadena[4]);
+		add(txtTelefonoClinica);
+		add(lblEmailClinica);
+		txtEmailClinica.setText(cadena[5]);
+		add(txtEmailClinica);
+		
+		btnAceptar.addActionListener(this);
+		btnLimpiar.addActionListener(this);
+		add(btnAceptar);
+		add(btnLimpiar);
+		addWindowListener(this);
+		setSize(400,300);
+		setResizable(false);
+		setLocationRelativeTo(null);
+		setVisible(true);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0)
+	{
+		if(btnLimpiar.equals(arg0.getSource()))
+		{
+			txtNifClinica.selectAll();
+			txtNifClinica.setText("");
+			txtNombreClinica.selectAll();
+			txtNombreClinica.setText("");
+			txtDireccionClinica.selectAll();
+			txtDireccionClinica.setText("");
+			txtTelefonoClinica.selectAll();
+			txtTelefonoClinica.setText("");
+			txtEmailClinica.selectAll();
+			txtEmailClinica.setText("");
+		}
+		else // btnAceptar
+		{
+			// Hacer UPDATE
+			String sentencia = "UPDATE clinicas SET nifClinica = '"+txtNifClinica.getText()+"', nombreClinica = '"+txtNombreClinica.getText()+"', direccionClinica = '"+txtDireccionClinica.getText()+"', telefonoClinica = '"+txtTelefonoClinica.getText()+"', direccionClinica = '"+txtEmailClinica.getText()+"' WHERE idClinica = "+idClinicaEditar;
+			utilidad.registrarLog(nombreUser,sentencia);
+			// Feedback
+			if((bd.modificarArticulos(conexion, sentencia))==0)
+			{
+				// Todo bien
+				mensaje.setText("Modificación de Clinica correcta");
+				dlgMensaje.setTitle("Modificar Clinica");
+				dlgMensaje.setSize(180,120);
+				dlgMensaje.setLayout(new FlowLayout());
+				dlgMensaje.addWindowListener(this);
+				dlgMensaje.add(mensaje);
+				dlgMensaje.setLocationRelativeTo(null);
+				dlgMensaje.setVisible(true);
+			}
+			else
+			{
+				// Error
+				mensaje.setText("Error en Modificación de Clinica");
+				dlgMensaje.setTitle("Modificar Clinica");
+				dlgMensaje.setSize(180,120);
+				dlgMensaje.setLayout(new FlowLayout());
+				dlgMensaje.addWindowListener(this);
+				dlgMensaje.add(mensaje);
+				dlgMensaje.setLocationRelativeTo(null);
+				dlgMensaje.setVisible(true);
+			}
+			// Desconectar
+			bd.desconectar(conexion);
+		}
+	}
+	@Override
+	public void windowClosing(WindowEvent arg0)
+	{
+		if(dlgMensaje.isActive())
+		{
+			dlgMensaje.setVisible(false);
+		}
+		else
+		{
+>>>>>>> branch 'master' of https://github.com/AlvCarballo/Pro_Laboratorio
 			setVisible(false);
 		}
 	}

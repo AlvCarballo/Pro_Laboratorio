@@ -32,6 +32,7 @@ public class ModificarArticulos extends Frame implements WindowListener, ActionL
 		Dialog dlgMensaje = new Dialog(this,"Mensaje", true);
 		Label mensaje = new Label("");
 		int idArticuloEditar;
+<<<<<<< HEAD
 		String NombreUsuario="";
 		Utilidades utilidad = new Utilidades();
 		
@@ -135,6 +136,103 @@ public class ModificarArticulos extends Frame implements WindowListener, ActionL
 		{
 			setVisible(false);
 			utilidad.registrarLog(NombreUsuario,"Saliendo de Modificar Articulo");
+=======
+		Utilidades utilidad = new Utilidades();
+
+		Login nombreUsuario=new Login();
+		String nombreUser=nombreUsuario.getnombreUsuario();
+		
+	public ModificarArticulos(int idArticuloEditar)
+	{
+		this.idArticuloEditar = idArticuloEditar; 
+		// Conectar BD
+		conexion = bd.conectar();
+		cadena = (bd.consultarArticulo(conexion, idArticuloEditar)).split("#");
+		// cadena[0] = idArticulo
+		// cadena[1] = nombreArticulo
+		// cadena[2] = precioArticulo
+		// cadena[3] = cantidadArticulo
+		setTitle("Modificar Cliente");
+		setLayout(new GridLayout(5,2));
+		
+		add(lblDescripcionArt);
+		txtDescripcionArt.setText(cadena[1]);
+		add(txtDescripcionArt);
+		add(lblPrecio);
+		txtPrecio.setText(cadena[2]);
+		add(txtPrecio);
+		add(lblCantidad);
+		txtCantidad.setText(cadena[3]);
+		add(txtCantidad);
+		
+		btnAceptar.addActionListener(this);
+		btnLimpiar.addActionListener(this);
+		add(btnAceptar);
+		add(btnLimpiar);
+		addWindowListener(this);
+		setSize(400,300);
+		setResizable(false);
+		setLocationRelativeTo(null);
+		setVisible(true);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0)
+	{
+		if(btnLimpiar.equals(arg0.getSource()))
+		{
+			txtDescripcionArt.selectAll();
+			txtDescripcionArt.setText("");
+			txtPrecio.selectAll();
+			txtPrecio.setText("");
+			txtCantidad.selectAll();
+			txtCantidad.setText("");
+		}
+		else // btnAceptar
+		{
+			// Hacer UPDATE
+			String sentencia = "UPDATE articulos SET nombreArticulo = '"+txtDescripcionArt.getText()+"', precioArticulo = '"+txtPrecio.getText()+"', precioArticulo = '"+txtCantidad.getText()+"' WHERE idArticulo = "+idArticuloEditar;
+			utilidad.registrarLog(nombreUser,sentencia);
+			// Feedback
+			if((bd.modificarArticulos(conexion, sentencia))==0)
+			{
+				// Todo bien
+				mensaje.setText("Modificación de Articulo correcta");
+				dlgMensaje.setTitle("Modificar Articulo");
+				dlgMensaje.setSize(180,120);
+				dlgMensaje.setLayout(new FlowLayout());
+				dlgMensaje.addWindowListener(this);
+				dlgMensaje.add(mensaje);
+				dlgMensaje.setLocationRelativeTo(null);
+				dlgMensaje.setVisible(true);
+			}
+			else
+			{
+				// Error
+				mensaje.setText("Error en Modificación de Articulo");
+				dlgMensaje.setTitle("Modificar Articulo");
+				dlgMensaje.setSize(180,120);
+				dlgMensaje.setLayout(new FlowLayout());
+				dlgMensaje.addWindowListener(this);
+				dlgMensaje.add(mensaje);
+				dlgMensaje.setLocationRelativeTo(null);
+				dlgMensaje.setVisible(true);
+			}
+			// Desconectar
+			bd.desconectar(conexion);
+		}
+	}
+	@Override
+	public void windowClosing(WindowEvent arg0)
+	{
+		if(dlgMensaje.isActive())
+		{
+			dlgMensaje.setVisible(false);
+		}
+		else
+		{
+			setVisible(false);
+>>>>>>> branch 'master' of https://github.com/AlvCarballo/Pro_Laboratorio
 		}
 	}
 	@Override

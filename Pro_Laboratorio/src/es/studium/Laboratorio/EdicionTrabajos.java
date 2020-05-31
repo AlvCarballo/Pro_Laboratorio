@@ -20,6 +20,7 @@ public class EdicionTrabajos extends Frame implements WindowListener, ActionList
 	Connection conexion = null;
 	String[] cadena;
 	int idTrabajoEditar = 0;
+<<<<<<< HEAD
 	String NombreUsuario="";
 	Utilidades utilidad = new Utilidades();
 	
@@ -79,6 +80,61 @@ public class EdicionTrabajos extends Frame implements WindowListener, ActionList
 	{
 		setVisible(false);
 		utilidad.registrarLog(NombreUsuario,"Saliendo de Edicion Trabajo");
+=======
+	
+	public EdicionTrabajos()
+	{
+		setTitle("Editar Trabajo");
+		setLayout(new FlowLayout());
+		// Rellenar el Choice
+		listado.add("Seleccionar un Trabajo...");
+		// Conectar BD
+		conexion = bd.conectar();
+		cadena = (bd.consultarTrabajosChoice(conexion)).split("#");
+		for(int i = 0; i < cadena.length; i++)
+		{
+			listado.add(cadena[i]);
+		}
+		add(listado);
+		btnAceptar.addActionListener(this);
+		btnLimpiar.addActionListener(this);
+		add(btnAceptar);
+		add(btnLimpiar);
+		addWindowListener(this);
+		setSize(400,300);
+		setResizable(false);
+		setLocationRelativeTo(null);
+		setVisible(true);
+	}
+	@Override
+	public void actionPerformed(ActionEvent arg0)
+	{
+		if(btnLimpiar.equals(arg0.getSource()))
+		{
+			listado.select(0);
+		}
+		else if(btnAceptar.equals(arg0.getSource()))
+		{
+			if(listado.getSelectedItem().equals("Seleccionar un Trabajo ..."))
+			{
+				// No hacemos nada
+			}
+			else
+			{
+				// Coger el elemento seleccionado
+				String[] tabla = listado.getSelectedItem().split("-");
+				// El Trabajo que quiero editar está en tabla[0]
+				idTrabajoEditar = Integer.parseInt(tabla[0]);
+				System.out.println(idTrabajoEditar);
+				new ModificarTrabajos(idTrabajoEditar); 
+			}
+		}
+	}
+	@Override
+	public void windowClosing(WindowEvent arg0)
+	{
+		setVisible(false);
+>>>>>>> branch 'master' of https://github.com/AlvCarballo/Pro_Laboratorio
 	}
 	@Override
 	public void windowActivated(WindowEvent arg0){}

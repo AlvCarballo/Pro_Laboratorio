@@ -38,6 +38,7 @@ public class Utilidades
 			System.out.println("Se produjo un error de Archivo");
 		}
 	}
+<<<<<<< HEAD
 	public void Ayuda()
 	{
 			try
@@ -49,4 +50,6 @@ public class Utilidades
 				e.printStackTrace();
 			}
 	}
+=======
+>>>>>>> branch 'master' of https://github.com/AlvCarballo/Pro_Laboratorio
 }
