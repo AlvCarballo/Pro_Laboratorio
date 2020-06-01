@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.JOptionPane;
+
 public class BaseDatos
 {
 	String BaseDatos="practica2laboratorio";
@@ -16,8 +18,6 @@ public class BaseDatos
 	
 	Connection connection = null;
 	Statement statement = null;
-	Statement statement1 = null;
-	Statement statement2 = null;
 	ResultSet rs = null;
 
 	public Connection conectar()
@@ -190,34 +190,30 @@ public class BaseDatos
 		int resultado = 1;
 		try
 		{
-			String sentencia1 = "DELETE FROM articulostrabajos WHERE idArticuloFK3 = "+ idArticulo;
-			String sentencia2 = "DELETE FROM articulos WHERE idArticulo = "+ idArticulo;
+			String sentencia = "DELETE FROM articulos WHERE idArticulo = "+ idArticulo;
 			//Crear una sentencia
-			statement1 = c.createStatement();
-			statement2 = c.createStatement();
+			statement = c.createStatement();
 			// Ejecutar la sentencia SQL
-			if((statement1.executeUpdate(sentencia1))==1)
+			if((statement.executeUpdate(sentencia))==1)
 			{
-				if((statement2.executeUpdate(sentencia2))==1) 
-				{
 				resultado = 0;
-				}
 			}
 			else
 			{
-				if((statement2.executeUpdate(sentencia2))==1) 
-				{
-				resultado = 0;
-				}
-				else
-				{
 				resultado = 1;
-				}
 			}
 		}
 		catch (SQLException sqle)
 		{
-			System.out.println("Error 2-"+sqle.getMessage());
+			int codError=Integer.parseInt(sqle.getSQLState());
+			if (codError == 23000)
+			{
+				JOptionPane.showMessageDialog(null, "ERROR: Al borrar. Codigo de error: "+sqle.getSQLState()+"\n"+"No se puede borrar, se comparten datos con trabajos");
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null, "ERROR: Al borrar. Codigo de error: "+sqle.getSQLState());
+			}
 		}
 		return (resultado);
 	}
@@ -333,34 +329,30 @@ public class BaseDatos
 		int resultado = 1;
 		try
 		{
-			String sentencia1 = "DELETE FROM trabajos WHERE idClinicaFK1 = "+ idClinica;
-			String sentencia2 = "DELETE FROM clinicas WHERE idClinica = "+ idClinica;
+			String sentencia = "DELETE FROM clinicas WHERE idClinica = "+ idClinica;
 			//Crear una sentencia
-			statement1 = c.createStatement();
-			statement2 = c.createStatement();
+			statement = c.createStatement();
 			// Ejecutar la sentencia SQL
-				if((statement1.executeUpdate(sentencia1))==1)
+				if((statement.executeUpdate(sentencia))==1)
 				{
-					if((statement2.executeUpdate(sentencia2))==1) 
-					{
 					resultado = 0;
-					}
 				}
 				else
 				{
-					if((statement2.executeUpdate(sentencia2))==1) 
-					{
-					resultado = 0;
-					}
-					else
-					{
 					resultado = 1;
-					}
 				}
 		}
 		catch (SQLException sqle)
 		{
-			System.out.println("Error 2-"+sqle.getMessage());
+			int codError=Integer.parseInt(sqle.getSQLState());
+			if (codError == 23000)
+			{
+				JOptionPane.showMessageDialog(null, "ERROR: Al borrar. Codigo de error: "+sqle.getSQLState()+"\n"+"No se puede borrar, se comparten datos con trabajos");
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null, "ERROR: Al borrar. Codigo de error: "+sqle.getSQLState());
+			}
 		}
 		return (resultado);
 	}
@@ -648,34 +640,30 @@ public class BaseDatos
 		int resultado = 1;
 		try
 		{
-			String sentencia1 = "DELETE FROM articulostrabajos WHERE idTrabajoFK2 = "+ idCTrabajo;
-			String sentencia2 = "DELETE FROM trabajos WHERE idTrabajo = "+ idCTrabajo;
+			String sentencia = "DELETE FROM trabajos WHERE idTrabajo = "+ idCTrabajo;
 			//Crear una sentencia
-			statement1 = c.createStatement();
-			statement2 = c.createStatement();
+			statement = c.createStatement();
 			// Ejecutar la sentencia SQL
-			if((statement1.executeUpdate(sentencia1))==1)
+			if((statement.executeUpdate(sentencia))==1)
 			{
-				if((statement2.executeUpdate(sentencia2))==1) 
-				{
 				resultado = 0;
-				}
 			}
 			else
 			{
-				if((statement2.executeUpdate(sentencia2))==1) 
-				{
-				resultado = 0;
-				}
-				else
-				{
 				resultado = 1;
-				}
 			}
 		}
 		catch (SQLException sqle)
 		{
-			System.out.println("Error 2-"+sqle.getMessage());
+			int codError=Integer.parseInt(sqle.getSQLState());
+			if (codError == 23000)
+			{
+				JOptionPane.showMessageDialog(null, "ERROR: Al borrar. Codigo de error: "+sqle.getSQLState()+"\n"+"No se puede borrar, se comparten datos con trabajos");
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null, "ERROR: Al borrar. Codigo de error: "+sqle.getSQLState());
+			}
 		}
 		return (resultado);
 	}

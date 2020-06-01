@@ -88,7 +88,7 @@ public class Login extends WindowAdapter implements ActionListener
 			sentencia = "SELECT * FROM usuarios WHERE ";
 			sentencia += "nombreUsuario = '"+txtUsuario.getText()+"'";
 			sentencia += " AND claveUsuario = '"+cadenaEncriptada+"'";
-			System.out.println(sentencia);
+			//System.out.println(sentencia);
 			//ULogeado=txtUsuario.getText();
 			try
 			{

@@ -58,6 +58,12 @@ public class BajaArticulos extends Frame implements WindowListener, ActionListen
 		setVisible(true);
 	}
 
+	/**
+	 *
+	 */
+	/**
+	 *
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
@@ -112,41 +118,28 @@ public class BajaArticulos extends Frame implements WindowListener, ActionListen
 			else
 			{
 				// Error
-				mensajeFeedback.setText("Error al borrar el articulo");
-				dlgMensajeFeedback.setTitle("Baja articulo");
-				dlgMensajeFeedback.setSize(400,120);
-				dlgMensajeFeedback.setLayout(new FlowLayout());
-				dlgMensajeFeedback.addWindowListener(this);
-				dlgMensajeFeedback.add(mensajeFeedback);
-				dlgMensajeFeedback.setLocationRelativeTo(null);
-				dlgMensajeFeedback.setVisible(true);
-				utilidad.registrarLog(NombreUsuario,"Error al borrar el articulo");
+//				mensajeFeedback.setText("Error al borrar el articulo");
+//				dlgMensajeFeedback.setTitle("Baja articulo");
+//				dlgMensajeFeedback.setSize(400,120);
+//				dlgMensajeFeedback.setLayout(new FlowLayout());
+//				dlgMensajeFeedback.addWindowListener(this);
+//				dlgMensajeFeedback.add(mensajeFeedback);
+//				dlgMensajeFeedback.setLocationRelativeTo(null);
+//				dlgMensajeFeedback.setVisible(true);
+//				utilidad.registrarLog(NombreUsuario,"Error al borrar el articulo");
 			}
 			// Desconectar BD
 			bd.desconectar(conexion);
-			
 		}
 		else // btnNo
 		{
 			dlgMensaje.setVisible(false);
 		}
-
 	}
-
 	@Override
-	public void windowActivated(WindowEvent e)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
+	public void windowActivated(WindowEvent e){}
 	@Override
-	public void windowClosed(WindowEvent e)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
+	public void windowClosed(WindowEvent e){}
 	@Override
 	public void windowClosing(WindowEvent e)
 	{
@@ -164,33 +157,12 @@ public class BajaArticulos extends Frame implements WindowListener, ActionListen
 			utilidad.registrarLog(NombreUsuario,"Saliendo de baja articulo");
 		}
 	}
-
 	@Override
-	public void windowDeactivated(WindowEvent e)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
+	public void windowDeactivated(WindowEvent e){}
 	@Override
-	public void windowDeiconified(WindowEvent e)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
+	public void windowDeiconified(WindowEvent e){}
 	@Override
-	public void windowIconified(WindowEvent e)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
+	public void windowIconified(WindowEvent e){}
 	@Override
-	public void windowOpened(WindowEvent e)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
+	public void windowOpened(WindowEvent e){}
 }

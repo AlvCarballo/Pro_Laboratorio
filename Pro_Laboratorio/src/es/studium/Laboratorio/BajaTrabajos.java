@@ -21,7 +21,7 @@ public class BajaTrabajos extends Frame implements WindowListener, ActionListene
 	BaseDatos bd = new BaseDatos();
 	Connection conexion = null;
 	Dialog dlgMensaje = new Dialog(this,"¿Está seguro?", true);
-	Label mensaje = new Label("¿Está seguro/a de eliminar este trabajo?, se borraran los datos relacionados.");
+	Label mensaje = new Label("¿Está seguro/a de eliminar este trabajo?.");
 	Button btnSi = new Button("Sí");
 	Button btnNo = new Button("No");
 	String[] cadena;
@@ -112,15 +112,15 @@ public class BajaTrabajos extends Frame implements WindowListener, ActionListene
 			else
 			{
 				// Error
-				mensajeFeedback.setText("Error al borrar el trabajo");
-				dlgMensajeFeedback.setTitle("Baja trabajo");
-				dlgMensajeFeedback.setSize(400,120);
-				dlgMensajeFeedback.setLayout(new FlowLayout());
-				dlgMensajeFeedback.addWindowListener(this);
-				dlgMensajeFeedback.add(mensajeFeedback);
-				dlgMensajeFeedback.setLocationRelativeTo(null);
-				dlgMensajeFeedback.setVisible(true);
-				utilidad.registrarLog(NombreUsuario,"Error al borrar el trabajo");
+//				mensajeFeedback.setText("Error al borrar el trabajo");
+//				dlgMensajeFeedback.setTitle("Baja trabajo");
+//				dlgMensajeFeedback.setSize(400,120);
+//				dlgMensajeFeedback.setLayout(new FlowLayout());
+//				dlgMensajeFeedback.addWindowListener(this);
+//				dlgMensajeFeedback.add(mensajeFeedback);
+//				dlgMensajeFeedback.setLocationRelativeTo(null);
+//				dlgMensajeFeedback.setVisible(true);
+//				utilidad.registrarLog(NombreUsuario,"Error al borrar el trabajo");
 			}
 			// Desconectar BD
 			bd.desconectar(conexion);
@@ -131,21 +131,10 @@ public class BajaTrabajos extends Frame implements WindowListener, ActionListene
 		}
 
 	}
-
 	@Override
-	public void windowActivated(WindowEvent e)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
+	public void windowActivated(WindowEvent e){}
 	@Override
-	public void windowClosed(WindowEvent e)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
+	public void windowClosed(WindowEvent e){}
 	@Override
 	public void windowClosing(WindowEvent e)
 	{
@@ -163,33 +152,12 @@ public class BajaTrabajos extends Frame implements WindowListener, ActionListene
 			utilidad.registrarLog(NombreUsuario,"Saliendo de baja trabajo");
 		}
 	}
-
 	@Override
-	public void windowDeactivated(WindowEvent e)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
+	public void windowDeactivated(WindowEvent e){}
 	@Override
-	public void windowDeiconified(WindowEvent e)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
+	public void windowDeiconified(WindowEvent e){}
 	@Override
-	public void windowIconified(WindowEvent e)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
+	public void windowIconified(WindowEvent e){}
 	@Override
-	public void windowOpened(WindowEvent e)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
+	public void windowOpened(WindowEvent e){}
 }
