@@ -94,7 +94,7 @@ public class BajaTrabajos extends Frame implements WindowListener, ActionListene
 			// Conectar BD
 			conexion = bd.conectar();
 			// Ejecutar DELETE
-			if((bd.borrarTrabajos(conexion, idTrabajoBorrar))==0)
+			if((bd.borrarTrabajos(conexion, NombreUsuario, idTrabajoBorrar))==0)
 			{
 				// Todo bien
 				mensajeFeedback.setText("Baja de trabajo correcta");

@@ -19,7 +19,8 @@ public class BaseDatos
 	Connection connection = null;
 	Statement statement = null;
 	ResultSet rs = null;
-
+	String NombreUsuario="";
+	Utilidades utilidad = new Utilidades();
 	public Connection conectar()
 	{
 		try
@@ -185,12 +186,14 @@ public class BaseDatos
 		}
 		return (resultado);
 	}
-	public int borrarArticulos(Connection c, int idArticulo)
+	public int borrarArticulos(Connection c, String UserName ,int idArticulo)
 	{
 		int resultado = 1;
+		String NombreUsuario=UserName;
 		try
 		{
 			String sentencia = "DELETE FROM articulos WHERE idArticulo = "+ idArticulo;
+			utilidad.registrarLog(NombreUsuario,sentencia);
 			//Crear una sentencia
 			statement = c.createStatement();
 			// Ejecutar la sentencia SQL
@@ -209,10 +212,12 @@ public class BaseDatos
 			if (codError == 23000)
 			{
 				JOptionPane.showMessageDialog(null, "ERROR: Al borrar. Codigo de error: "+sqle.getSQLState()+"\n"+"No se puede borrar, se comparten datos con trabajos");
+				utilidad.registrarLog(NombreUsuario,"ERROR: Al borrar. Codigo de error: "+codError+" No se puede borrar, se comparten datos con trabajos");
 			}
 			else
 			{
 				JOptionPane.showMessageDialog(null, "ERROR: Al borrar. Codigo de error: "+sqle.getSQLState());
+				utilidad.registrarLog(NombreUsuario,"ERROR: Al borrar. Codigo de error: "+codError);
 			}
 		}
 		return (resultado);
@@ -324,12 +329,14 @@ public class BaseDatos
 		}
 		return (resultado);
 	}
-	public int borrarClinicas(Connection c, int idClinica)
+	public int borrarClinicas(Connection c, String UserName ,int idClinica)
 	{
 		int resultado = 1;
+		String NombreUsuario=UserName;
 		try
 		{
 			String sentencia = "DELETE FROM clinicas WHERE idClinica = "+ idClinica;
+			utilidad.registrarLog(NombreUsuario,sentencia);
 			//Crear una sentencia
 			statement = c.createStatement();
 			// Ejecutar la sentencia SQL
@@ -348,10 +355,12 @@ public class BaseDatos
 			if (codError == 23000)
 			{
 				JOptionPane.showMessageDialog(null, "ERROR: Al borrar. Codigo de error: "+sqle.getSQLState()+"\n"+"No se puede borrar, se comparten datos con trabajos");
+				utilidad.registrarLog(NombreUsuario,"ERROR: Al borrar. Codigo de error: "+codError+" No se puede borrar, se comparten datos con trabajos");
 			}
 			else
 			{
 				JOptionPane.showMessageDialog(null, "ERROR: Al borrar. Codigo de error: "+sqle.getSQLState());
+				utilidad.registrarLog(NombreUsuario,"ERROR: Al borrar. Codigo de error: "+codError);
 			}
 		}
 		return (resultado);
@@ -635,12 +644,14 @@ public class BaseDatos
 		}
 		return (resultado);
 	}
-	public int borrarTrabajos(Connection c, int idCTrabajo)
+	public int borrarTrabajos(Connection c, String UserName, int idCTrabajo)
 	{
 		int resultado = 1;
+		String NombreUsuario=UserName;
 		try
 		{
 			String sentencia = "DELETE FROM trabajos WHERE idTrabajo = "+ idCTrabajo;
+			utilidad.registrarLog(NombreUsuario,sentencia);
 			//Crear una sentencia
 			statement = c.createStatement();
 			// Ejecutar la sentencia SQL
@@ -659,10 +670,12 @@ public class BaseDatos
 			if (codError == 23000)
 			{
 				JOptionPane.showMessageDialog(null, "ERROR: Al borrar. Codigo de error: "+sqle.getSQLState()+"\n"+"No se puede borrar, se comparten datos con trabajos");
+				utilidad.registrarLog(NombreUsuario,"ERROR: Al borrar. Codigo de error: "+codError+" No se puede borrar, se comparten datos con trabajos");
 			}
 			else
 			{
 				JOptionPane.showMessageDialog(null, "ERROR: Al borrar. Codigo de error: "+sqle.getSQLState());
+				utilidad.registrarLog(NombreUsuario,"ERROR: Al borrar. Codigo de error: "+codError);
 			}
 		}
 		return (resultado);

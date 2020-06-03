@@ -94,7 +94,7 @@ public class BajaClinicas extends Frame implements WindowListener, ActionListene
 			// Conectar BD
 			conexion = bd.conectar();
 			// Ejecutar DELETE
-			if((bd.borrarClinicas(conexion, idClinicaBorrar))==0)
+			if((bd.borrarClinicas(conexion, NombreUsuario, idClinicaBorrar))==0)
 			{
 				// Todo bien
 				mensajeFeedback.setText("Baja de clinica correcta");

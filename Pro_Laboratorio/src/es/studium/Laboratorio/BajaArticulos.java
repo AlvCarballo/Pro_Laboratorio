@@ -100,7 +100,7 @@ public class BajaArticulos extends Frame implements WindowListener, ActionListen
 			// Conectar BD
 			conexion = bd.conectar();
 			// Ejecutar DELETE
-			if((bd.borrarArticulos(conexion, idArticuloBorrar))==0)
+			if((bd.borrarArticulos(conexion, NombreUsuario, idArticuloBorrar))==0)
 			{
 				// Todo bien
 				mensajeFeedback.setText("Baja de articulo correcta");
@@ -126,7 +126,7 @@ public class BajaArticulos extends Frame implements WindowListener, ActionListen
 //				dlgMensajeFeedback.add(mensajeFeedback);
 //				dlgMensajeFeedback.setLocationRelativeTo(null);
 //				dlgMensajeFeedback.setVisible(true);
-//				utilidad.registrarLog(NombreUsuario,"Error al borrar el articulo");
+				utilidad.registrarLog(NombreUsuario,"Error al borrar el articulo");
 			}
 			// Desconectar BD
 			bd.desconectar(conexion);
